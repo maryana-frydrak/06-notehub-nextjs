@@ -1,5 +1,3 @@
-"use client";
-
 import css from "./ErrorMessage.module.css";
 
 interface ErrorMessageProps {
