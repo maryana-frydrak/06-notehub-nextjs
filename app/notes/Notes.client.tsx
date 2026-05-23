@@ -8,7 +8,7 @@ import { fetchNotes } from "@/lib/api";
 import Pagination from "@/components/Pagination/Pagination";
 import Modal from "@/components/Modal/Modal";
 import NoteForm from "@/components/NoteForm/NoteForm";
-import type { NotesResponse } from "@/types/note";
+import type { NotesResponse } from "@/types/api";
 import { useDebouncedCallback } from "use-debounce";
 import { SearchBox } from "@/components/SearchBox/SearchBox";
 import Loader from "@/components/Loader/Loader";
@@ -18,11 +18,10 @@ import { Toaster } from "react-hot-toast";
 function App() {
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [filter, setFilter] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const { data, isLoading, isError } = useQuery<NotesResponse>({
-    queryKey: ["notes", page, filter, search],
-    queryFn: () => fetchNotes(page, 10, filter, search),
+    queryKey: ["notes", page, search],
+    queryFn: () => fetchNotes(page, 10, search),
     placeholderData: (previousData) => previousData,
   });
 
@@ -52,62 +51,7 @@ function App() {
             onPageChange={handlePageChange}
           />
         )}
-        <div className={css.filters}>
-          <button
-            className={css.filterBtn}
-            onClick={() => {
-              setFilter(null);
-              setPage(1);
-            }}
-          >
-            All
-          </button>
-          <button
-            className={css.filterBtn}
-            onClick={() => {
-              setFilter("Todo");
-              setPage(1);
-            }}
-          >
-            Todo
-          </button>
-          <button
-            className={css.filterBtn}
-            onClick={() => {
-              setFilter("Work");
-              setPage(1);
-            }}
-          >
-            Work
-          </button>
-          <button
-            className={css.filterBtn}
-            onClick={() => {
-              setFilter("Personal");
-              setPage(1);
-            }}
-          >
-            Personal
-          </button>
-          <button
-            className={css.filterBtn}
-            onClick={() => {
-              setFilter("Meeting");
-              setPage(1);
-            }}
-          >
-            Meeting
-          </button>
-          <button
-            className={css.filterBtn}
-            onClick={() => {
-              setFilter("Shopping");
-              setPage(1);
-            }}
-          >
-            Shopping
-          </button>
-        </div>
+        
         <button className={css.button} onClick={openModal}>
           Create note +
         </button>
