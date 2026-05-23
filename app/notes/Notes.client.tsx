@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchNotes } from "@/lib/api";
 import Pagination from "@/components/Pagination/Pagination";
-// import dynamic from "next/dynamic";
 import Modal from "@/components/Modal/Modal";
 import NoteForm from "@/components/NoteForm/NoteForm";
 import type { NotesResponse } from "@/types/note";
@@ -15,10 +14,6 @@ import { SearchBox } from "@/components/SearchBox/SearchBox";
 import Loader from "@/components/Loader/Loader";
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 import { Toaster } from "react-hot-toast";
-
-// const Pagination = dynamic(() => import("@/components/Pagination/Pagination"), {
-//   ssr: false,
-// });
 
 function App() {
   const [page, setPage] = useState(1);

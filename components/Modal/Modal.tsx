@@ -4,8 +4,6 @@ import { useEffect } from "react";
 import css from "./Modal.module.css";
 import { createPortal } from "react-dom";
 
-const modalRoot = document.querySelector("#modal-root") as HTMLElement;
-
 export const Modal = ({
   children,
   onClose,
@@ -27,6 +25,8 @@ export const Modal = ({
       document.body.style.overflow = "";
     };
   }, [onClose]);
+  if (typeof window === "undefined") return null;
+  const modalRoot = document.querySelector("#modal-root") || document.body;
   return createPortal(
     <div
       className={css.backdrop}
