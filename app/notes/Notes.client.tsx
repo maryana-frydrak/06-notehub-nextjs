@@ -51,7 +51,7 @@ function App() {
             onPageChange={handlePageChange}
           />
         )}
-        
+
         <button className={css.button} onClick={openModal}>
           Create note +
         </button>
